@@ -1,6 +1,0 @@
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\dominio\bin\Debug\dominio.dll
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\dominio\bin\Debug\dominio.pdb
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\dominio\obj\Debug\dominio.dll
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\dominio\obj\Debug\dominio.pdb

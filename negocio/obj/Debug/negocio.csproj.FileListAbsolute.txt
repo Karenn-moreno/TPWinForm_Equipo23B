@@ -1,9 +1,0 @@
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\bin\Debug\negocio.dll
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\bin\Debug\negocio.pdb
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\bin\Debug\dominio.dll
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\bin\Debug\dominio.pdb
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\obj\Debug\negocio.csproj.AssemblyReference.cache
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\obj\Debug\negocio.csproj.CoreCompileInputs.cache
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\obj\Debug\negocio.csproj.Up2Date
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\obj\Debug\negocio.dll
-C:\Users\anahi\OneDrive\Escritorio\Ejercicio2_progra3\TPWinForm_equipo-23B\negocio\obj\Debug\negocio.pdb
