@@ -26,18 +26,19 @@ namespace TPWinForm_Presentacion
         private void Form1_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.Listar();   // Traer artículos una sola vez
-            dgvArticulo.DataSource = listaArticulos;
+            listaArticulos = negocio.Listar();   // Traer todos los artículos
 
-
-            // Traer imágenes
+            // Traer todas las imágenes
             List<Imagen> listaImagenes = imagenNeg.Listar();
-
 
             if (listaArticulos != null && listaImagenes != null)
             {
                 foreach (var art in listaArticulos)
                 {
+                    // Inicializar la lista de imágenes del artículo
+                    art.Imagenes = new List<Imagen>();
+
+                    // Relacionar solo las imágenes que tengan el objeto Articulo asignado
                     var imgs = listaImagenes
                         .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
                         .ToList();
@@ -47,46 +48,64 @@ namespace TPWinForm_Presentacion
                 }
             }
 
-            // Mostrar artículos en DataGridView
+            // Muestra los artículos en DataGridView
             dgvArticulo.DataSource = listaArticulos;
-            //dgvArticulo.Columns["Imagenes"].Visible = false; // opcional
         }
-
 
         private void dgvArticulo_SelectionChanged(object sender, EventArgs e)
         {
-
-            //if (dgvArticulo.CurrentRow == null) return;
-
             if (dgvArticulo.CurrentRow == null) return;
 
             Articulo seleccionado = dgvArticulo.CurrentRow.DataBoundItem as Articulo;
-            if (seleccionado == null) return; // <- seguridad extra
+            if (seleccionado == null) return;
 
-          
             // Limpiar FlowLayoutPanel antes de agregar nuevas imágenes
             fpImagen.Controls.Clear();
 
-            // Agregar todas las imágenes del artículo
-            foreach (var img in seleccionado.Imagenes)
+            // Si el artículo no tiene imágenes, mostrar imagen por defecto
+            if (seleccionado.Imagenes.Count == 0)
             {
-                PictureBox pb = new PictureBox();
-                pb.Width = 120;
-                pb.Height = 120;
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                try
+                PictureBox pb = new PictureBox
                 {
-                    pb.Load(img.UrlImagen);
-                }
-                catch
-                {
-                    // Imagen por defecto si falla
-                    pb.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
-                }
-
+                    Width = 120,
+                    Height = 120,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+                pb.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
                 fpImagen.Controls.Add(pb);
             }
+            else
+            {
+                // Mostrar todas las imágenes asociadas
+                foreach (var img in seleccionado.Imagenes)
+                {
+                    PictureBox pb = new PictureBox
+                    {
+                        Width = 120,
+                        Height = 120,
+                        SizeMode = PictureBoxSizeMode.StretchImage
+                    };
+
+                    try
+                    {
+                        pb.Load(img.UrlImagen);
+                    }
+                    catch
+                    {
+                        // Imagen por defecto si falla la URL
+                        pb.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+                    }
+
+                    fpImagen.Controls.Add(pb);
+                }
+
+            }
+
+
+        }
+
+        private void fpImagen_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

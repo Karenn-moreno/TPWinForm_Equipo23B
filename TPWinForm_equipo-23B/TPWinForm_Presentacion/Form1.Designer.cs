@@ -35,31 +35,33 @@
             // 
             // dgvArticulo
             // 
-            this.dgvArticulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvArticulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvArticulo.Location = new System.Drawing.Point(23, 64);
+            this.dgvArticulo.Location = new System.Drawing.Point(45, 110);
             this.dgvArticulo.Name = "dgvArticulo";
-            this.dgvArticulo.Size = new System.Drawing.Size(500, 258);
+            this.dgvArticulo.Size = new System.Drawing.Size(463, 227);
             this.dgvArticulo.TabIndex = 0;
             this.dgvArticulo.SelectionChanged += new System.EventHandler(this.dgvArticulo_SelectionChanged);
             // 
             // fpImagen
             // 
             this.fpImagen.AutoScroll = true;
-            this.fpImagen.Location = new System.Drawing.Point(548, 64);
+            this.fpImagen.Location = new System.Drawing.Point(541, 110);
             this.fpImagen.Name = "fpImagen";
-            this.fpImagen.Size = new System.Drawing.Size(240, 258);
+            this.fpImagen.Size = new System.Drawing.Size(148, 227);
             this.fpImagen.TabIndex = 1;
+            this.fpImagen.Paint += new System.Windows.Forms.PaintEventHandler(this.fpImagen_Paint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(733, 475);
             this.Controls.Add(this.fpImagen);
             this.Controls.Add(this.dgvArticulo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).EndInit();

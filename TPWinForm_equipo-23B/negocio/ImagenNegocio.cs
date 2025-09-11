@@ -16,7 +16,17 @@ namespace negocio
             SqlConnection conexion = new SqlConnection("Server=.\\SQLEXPRESS; Initial Catalog=CATALOGO_P3_DB; Integrated Security=true;");
             SqlCommand comando = new SqlCommand();
             comando.Connection = conexion;
-            comando.CommandText = "SELECT Id, IdArticulo, ImagenUrl FROM IMAGENES";
+            comando.CommandText =  @"
+    SELECT i.Id, i.IdArticulo, i.ImagenUrl,
+       a.Nombre,
+       m.Descripcion AS Marca,
+       c.Descripcion AS Categoria
+  FROM IMAGENES i
+  INNER JOIN ARTICULOS a ON i.IdArticulo = a.Id
+  INNER JOIN MARCAS m ON a.IdMarca = m.Id
+  INNER JOIN CATEGORIAS c ON a.IdCategoria = c.Id";
+
+            //SELECT Id, IdArticulo, ImagenUrl FROM IMAGENES
 
             conexion.Open();
             SqlDataReader lector = comando.ExecuteReader();
