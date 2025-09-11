@@ -47,7 +47,7 @@ namespace negocio
                 articulo.Categoria = new Categoria();
                 articulo.Categoria.Descripcion = (string)lector["Categoria"];
 
-                articulo.Precio = (decimal)lector["Precio"];
+                articulo.Precio = (decimal)lector["Precio"];// comentario 2
 
                 lista.Add(articulo);
             }
