@@ -52,9 +52,14 @@ namespace negocio
                 lista.Add(articulo);
             }
             conexion.Close();
-
+            
 
             return lista;
+        }
+            //nuevo articulo
+            public void Agregar(Articulo nuevo)
+        {
+
         }
     }
 }
