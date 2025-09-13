@@ -30,6 +30,7 @@
         {
             this.dgvArticulo = new System.Windows.Forms.DataGridView();
             this.fpImagen = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnEleminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,11 +52,22 @@
             this.fpImagen.TabIndex = 1;
             this.fpImagen.Paint += new System.Windows.Forms.PaintEventHandler(this.fpImagen_Paint);
             // 
+            // btnEleminar
+            // 
+            this.btnEleminar.Location = new System.Drawing.Point(244, 365);
+            this.btnEleminar.Name = "btnEleminar";
+            this.btnEleminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEleminar.TabIndex = 2;
+            this.btnEleminar.Text = "Elimnar";
+            this.btnEleminar.UseVisualStyleBackColor = true;
+            this.btnEleminar.Click += new System.EventHandler(this.btnEleminar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 475);
+            this.Controls.Add(this.btnEleminar);
             this.Controls.Add(this.fpImagen);
             this.Controls.Add(this.dgvArticulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -73,6 +85,7 @@
 
         private System.Windows.Forms.DataGridView dgvArticulo;
         private System.Windows.Forms.FlowLayoutPanel fpImagen;
+        private System.Windows.Forms.Button btnEleminar;
     }
 }
 

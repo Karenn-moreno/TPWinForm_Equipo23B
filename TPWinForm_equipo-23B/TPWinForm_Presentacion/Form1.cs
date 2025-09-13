@@ -25,31 +25,7 @@ namespace TPWinForm_Presentacion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.Listar();   // Traer todos los artículos
-
-            // Traer todas las imágenes
-            List<Imagen> listaImagenes = imagenNeg.Listar();
-
-            if (listaArticulos != null && listaImagenes != null)
-            {
-                foreach (var art in listaArticulos)
-                {
-                    // Inicializar la lista de imágenes del artículo
-                    art.Imagenes = new List<Imagen>();
-
-                    // Relacionar solo las imágenes que tengan el objeto Articulo asignado
-                    var imgs = listaImagenes
-                        .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
-                        .ToList();
-
-                    if (imgs.Count > 0)
-                        art.Imagenes.AddRange(imgs);
-                }
-            }
-
-            // Muestra los artículos en DataGridView
-            dgvArticulo.DataSource = listaArticulos;
+            cargar();
         }
 
         private void dgvArticulo_SelectionChanged(object sender, EventArgs e)
@@ -104,9 +80,62 @@ namespace TPWinForm_Presentacion
 
         }
 
+        private void cargar()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            listaArticulos = negocio.Listar();   // Traer todos los artículos
+
+            // Traer todas las imágenes
+            List<Imagen> listaImagenes = imagenNeg.Listar();
+
+            if (listaArticulos != null && listaImagenes != null)
+            {
+                foreach (var art in listaArticulos)
+                {
+                    // Inicializar la lista de imágenes del artículo
+                    art.Imagenes = new List<Imagen>();
+
+                    // Relacionar solo las imágenes que tengan el objeto Articulo asignado
+                    var imgs = listaImagenes
+                        .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
+                        .ToList();
+
+                    if (imgs.Count > 0)
+                        art.Imagenes.AddRange(imgs);
+                }
+            }
+
+            // Muestra los artículos en DataGridView
+            dgvArticulo.DataSource = listaArticulos;
+        }
+
         private void fpImagen_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
+        private void btnEleminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+            try
+            {
+                DialogResult respuesta=MessageBox.Show("¿Desea eliminarlo?","Eliminado",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
+                    negocio.eliminar(seleccionado.Id);
+                    cargar();//actualiza la grilla
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+
+
     }
 }

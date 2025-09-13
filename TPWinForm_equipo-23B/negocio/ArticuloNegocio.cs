@@ -31,10 +31,10 @@ namespace negocio
             SqlDataReader lector;
 
             conexion.Open();
-            lector= comando.ExecuteReader();
+            lector = comando.ExecuteReader();
 
-            while (lector.Read()) 
-            { 
+            while (lector.Read())
+            {
                 Articulo articulo = new Articulo();
                 articulo.Id = (int)lector["Id"];
                 articulo.Codigo = (string)lector["Codigo"];
@@ -52,20 +52,48 @@ namespace negocio
                 lista.Add(articulo);
             }
             conexion.Close();
-            
+
 
             return lista;
         }
-            //nuevo articulo
-            public void Agregar(Articulo nuevo)
+        //nuevo articulo
+        public void Agregar(Articulo nuevo)
         {
-            try{
+            try
+            {
 
 
-        }
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+
+
+        public void eliminar(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("delete from ARTICULOS where id=@");
+                datos.setearParametro("@",id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        
+        }
+
+
+
+
+
+
     }
+
 }
