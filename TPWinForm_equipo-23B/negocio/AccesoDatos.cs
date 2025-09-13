@@ -14,13 +14,12 @@ namespace negocio
         private SqlCommand comando;
         private SqlDataReader lector;
 
-        ///agrego:
         public SqlDataReader Lector
         {
             get { return lector; }
         }
 
-    }
+    
 
         
 
