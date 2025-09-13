@@ -59,7 +59,13 @@ namespace negocio
             //nuevo articulo
             public void Agregar(Articulo nuevo)
         {
+            try{
+
 
         }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
     }
 }
