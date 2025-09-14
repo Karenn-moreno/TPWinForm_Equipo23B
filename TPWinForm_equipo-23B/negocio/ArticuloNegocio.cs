@@ -118,9 +118,17 @@ namespace negocio
 
                 datos.setearParametro("@IdMarca", nuevo.Marca.Id);
                 datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
-                datos.setearParametro("@ImagenUrl", nuevo.Imagenes);
-                datos.ejecutarAccion();
 
+                //datos.setearParametro("@ImagenUrl", nuevo.Imagenes);
+                //datos.ejecutarAccion();
+
+                // Obtener la URL de la primera imagen o usar la por defecto
+                string urlImagen = (nuevo.Imagenes != null && nuevo.Imagenes.Count > 0)
+                                   ? nuevo.Imagenes[0].UrlImagen
+                                   : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png";
+
+                datos.setearParametro("@ImagenUrl", urlImagen);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -132,30 +140,23 @@ namespace negocio
             }
         }
 
-
-        
         public void eliminar(int id)
         {
             try
             {
                 AccesoDatos datos = new AccesoDatos();
                 datos.setearConsulta("delete from ARTICULOS where id=@");
-                datos.setearParametro("@",id);
+                datos.setearParametro("@", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-        
+
         }
 
 
 
-
-
-
     }
-
 }

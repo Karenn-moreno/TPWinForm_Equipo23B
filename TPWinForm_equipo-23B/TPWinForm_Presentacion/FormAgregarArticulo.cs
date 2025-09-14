@@ -43,7 +43,21 @@ namespace TPWinForm_Presentacion
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
                 //imagen
 
-                if (articulo.Id != 0)
+
+                // --- Agregar URL de imagen desde el TextBox ---
+                string urlImagen = string.IsNullOrWhiteSpace(txtUrlImagen.Text)
+                                   ? "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
+                                   : txtUrlImagen.Text;
+
+                if (articulo.Imagenes == null)
+                    articulo.Imagenes = new List<Imagen>();
+
+                articulo.Imagenes.Clear(); // Limpiar lista 
+                articulo.Imagenes.Add(new Imagen { UrlImagen = urlImagen });
+
+
+
+                if (articulo.Id == 0)
                 {
 
                     negocio.Agregar(articulo);
@@ -91,6 +105,25 @@ namespace TPWinForm_Presentacion
         {
 
         }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            CargarImagen(txtUrlImagen.Text);
+        }
+
+        private void CargarImagen(string url)
+        {
+            try
+            {
+                pbImagen.Load(url);
+            }
+            catch
+            {
+                
+                pbImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+            }
+        }
+
     }
 }
     

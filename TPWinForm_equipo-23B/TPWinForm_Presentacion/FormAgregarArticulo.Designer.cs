@@ -44,6 +44,7 @@
             this.lblPrecio = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.pbImagen = new System.Windows.Forms.PictureBox();
+            this.txtUrlImagen = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,11 +157,11 @@
             // lblImagen
             // 
             this.lblImagen.AutoSize = true;
-            this.lblImagen.Location = new System.Drawing.Point(253, 283);
+            this.lblImagen.Location = new System.Drawing.Point(241, 283);
             this.lblImagen.Name = "lblImagen";
-            this.lblImagen.Size = new System.Drawing.Size(42, 13);
+            this.lblImagen.Size = new System.Drawing.Size(67, 13);
             this.lblImagen.TabIndex = 12;
-            this.lblImagen.Text = "Imagen";
+            this.lblImagen.Text = "URL-Imagen";
             // 
             // lblPrecio
             // 
@@ -180,18 +181,28 @@
             // 
             // pbImagen
             // 
-            this.pbImagen.Location = new System.Drawing.Point(307, 283);
+            this.pbImagen.Location = new System.Drawing.Point(307, 313);
             this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(128, 75);
+            this.pbImagen.Size = new System.Drawing.Size(128, 80);
+            this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagen.TabIndex = 16;
             this.pbImagen.TabStop = false;
             this.pbImagen.Click += new System.EventHandler(this.pbImagen_Click);
+            // 
+            // txtUrlImagen
+            // 
+            this.txtUrlImagen.Location = new System.Drawing.Point(314, 276);
+            this.txtUrlImagen.Name = "txtUrlImagen";
+            this.txtUrlImagen.Size = new System.Drawing.Size(121, 20);
+            this.txtUrlImagen.TabIndex = 17;
+            this.txtUrlImagen.Leave += new System.EventHandler(this.txtUrlImagen_Leave);
             // 
             // FormAgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 450);
+            this.Controls.Add(this.txtUrlImagen);
             this.Controls.Add(this.pbImagen);
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.lblPrecio);
@@ -235,5 +246,6 @@
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.PictureBox pbImagen;
+        private System.Windows.Forms.TextBox txtUrlImagen;
     }
 }
