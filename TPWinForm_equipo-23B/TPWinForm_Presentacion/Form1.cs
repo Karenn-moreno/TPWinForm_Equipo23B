@@ -134,8 +134,30 @@ namespace TPWinForm_Presentacion
             }
         }
 
+        private void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+            // Asegúrate de que el nombre del control sea el mismo en el código y en el diseñador
+            if (dgvArticulo.CurrentRow != null)
+            {
+                try
+                {
+                    // Obtener el ID del artículo seleccionado
+                    Articulo articuloSeleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
+                    int idArticulo = articuloSeleccionado.Id;
 
-
-
+                    // Abrir el formulario de detalle
+                    frmVerDetalle detalle = new frmVerDetalle(idArticulo);
+                    detalle.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un artículo para ver los detalles.");
+            }
+        }
     }
 }

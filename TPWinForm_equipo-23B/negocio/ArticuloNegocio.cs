@@ -56,6 +56,55 @@ namespace negocio
 
             return lista;
         }
+        public Articulo Listar(int id)// sobrecargamos el método Listar
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Articulo articulo = null;
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT a.Id, a.Codigo, a.Nombre, a.Descripcion,
+                   m.Descripcion AS Marca,
+                   c.Descripcion AS Categoria,
+                   a.Precio
+            FROM ARTICULOS a
+            INNER JOIN MARCAS m ON a.IdMarca = m.Id
+            INNER JOIN CATEGORIAS c ON a.IdCategoria = c.Id
+            WHERE a.Id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    articulo = new Articulo();
+                    articulo.Id = (int)datos.Lector["Id"];
+                    articulo.Codigo = (string)datos.Lector["Codigo"];
+                    articulo.Nombre = (string)datos.Lector["Nombre"];
+                    articulo.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    articulo.Marca = new Marca();
+                    articulo.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    articulo.Categoria = new Categoria();
+                    articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    articulo.Precio = (decimal)datos.Lector["Precio"];
+
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    articulo.Imagenes = imagenNegocio.ListarPorArticulo(id);
+                }
+
+                return articulo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         //nuevo articulo
         public void Agregar(Articulo nuevo)
         {
@@ -71,7 +120,7 @@ namespace negocio
         }
 
 
-
+        
         public void eliminar(int id)
         {
             try

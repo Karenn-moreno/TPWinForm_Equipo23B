@@ -17,7 +17,7 @@ namespace negocio
         ///agrego:
         public SqlDataReader Lector
         {
-            get { return lector; }
+            get { return lector; 
         }
 
     }
