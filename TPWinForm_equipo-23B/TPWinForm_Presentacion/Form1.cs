@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using negocio; //acceder al objeto 
 
 
+
 namespace TPWinForm_Presentacion
 {
     public partial class Form1 : Form

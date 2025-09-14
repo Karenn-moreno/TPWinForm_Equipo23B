@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using dominio;///
-using negocio;//
+using dominio;
+using negocio;
 
 namespace TPWinForm_Presentacion
 {
     public partial class FormAgregarArticulo : Form
     {
-        private Articulo articulo = null;//
+        private Articulo articulo = null;
         public FormAgregarArticulo()
         {
             InitializeComponent();
@@ -38,14 +38,18 @@ namespace TPWinForm_Presentacion
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                ///agregar mas 
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
+                articulo.Categoria=(Categoria)cboCategoria.SelectedItem;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                //imagen
 
                 if (articulo.Id != 0)
                 {
-                
+
                     negocio.Agregar(articulo);
                     MessageBox.Show("Agregado exitosamente");
                 }
+
 
                 Close();
 
@@ -56,10 +60,38 @@ namespace TPWinForm_Presentacion
             }
         }
 
+        //despegables
         private void FormAgregarArticulo_Load(object sender, EventArgs e)
         {
-            ///marcaNegocio marcaNegocio = new MarcaNegocio();
-            ///CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            try
+            {
+                cboMarca.DataSource = marcaNegocio.listar();
+                cboCategoria.DataSource = categoriaNegocio.listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        //ver
+        private void txtMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void lblDescripcion_Click(object sender, EventArgs e)
+        {
+
+       }
+
+        private void pbImagen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
+    
+
