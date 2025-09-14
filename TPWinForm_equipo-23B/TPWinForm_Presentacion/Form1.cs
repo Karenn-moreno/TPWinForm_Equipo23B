@@ -134,8 +134,11 @@ namespace TPWinForm_Presentacion
             }
         }
 
-
-
-
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            FormAgregarArticulo agregarArticulo = new FormAgregarArticulo();
+            agregarArticulo.ShowDialog();
+        }
     }
-}
+    }
+

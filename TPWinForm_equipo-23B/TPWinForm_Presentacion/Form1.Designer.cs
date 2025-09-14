@@ -31,6 +31,7 @@
             this.dgvArticulo = new System.Windows.Forms.DataGridView();
             this.fpImagen = new System.Windows.Forms.FlowLayoutPanel();
             this.btnEleminar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,11 +63,22 @@
             this.btnEleminar.UseVisualStyleBackColor = true;
             this.btnEleminar.Click += new System.EventHandler(this.btnEleminar_Click);
             // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(404, 364);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.TabIndex = 3;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 475);
+            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnEleminar);
             this.Controls.Add(this.fpImagen);
             this.Controls.Add(this.dgvArticulo);
@@ -86,6 +98,7 @@
         private System.Windows.Forms.DataGridView dgvArticulo;
         private System.Windows.Forms.FlowLayoutPanel fpImagen;
         private System.Windows.Forms.Button btnEleminar;
+        private System.Windows.Forms.Button btnAgregar;
     }
 }
 
