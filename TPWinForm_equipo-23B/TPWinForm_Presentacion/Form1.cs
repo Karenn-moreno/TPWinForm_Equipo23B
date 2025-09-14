@@ -134,6 +134,7 @@ namespace TPWinForm_Presentacion
             }
         }
 
+<<<<<<< HEAD
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
             // Asegúrate de que el nombre del control sea el mismo en el código y en el diseñador
@@ -158,6 +159,13 @@ namespace TPWinForm_Presentacion
             {
                 MessageBox.Show("Por favor, seleccione un artículo para ver los detalles.");
             }
+=======
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            FormAgregarArticulo agregarArticulo = new FormAgregarArticulo();
+            agregarArticulo.ShowDialog();
+>>>>>>> b8daf4f393344c5ba27515e85f819b72136d50ba
         }
     }
-}
+    }
+
