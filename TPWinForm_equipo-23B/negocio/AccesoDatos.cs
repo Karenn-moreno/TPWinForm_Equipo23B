@@ -16,7 +16,7 @@ namespace negocio
 
         public SqlDataReader Lector
         {
-            get { return lector; 
+            get { return lector; }
         }
 
     

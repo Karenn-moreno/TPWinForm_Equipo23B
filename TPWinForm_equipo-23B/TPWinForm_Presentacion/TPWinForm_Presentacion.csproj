@@ -69,13 +69,11 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="frmVerDetalle.resx">
       <DependentUpon>frmVerDetalle.cs</DependentUpon>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAgregarArticulo.resx">
       <DependentUpon>FormAgregarArticulo.cs</DependentUpon>
->>>>>>> b8daf4f393344c5ba27515e85f819b72136d50ba
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

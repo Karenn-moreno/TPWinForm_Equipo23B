@@ -31,9 +31,12 @@ namespace TPWinForm_Presentacion
 
         private void frmVerDetalle_Load(object sender, EventArgs e)
         {
+
+            MessageBox.Show("ID artículo recibido: " + idArticulo);
+
             try
             {
-                // Usar la capa de negocio para obtener todos los detalles del artículo
+
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Articulo articuloCompleto = negocio.Listar(idArticulo);
 
@@ -45,17 +48,34 @@ namespace TPWinForm_Presentacion
                 lblCategoria.Text = "Categoría: " + articuloCompleto.Categoria.Descripcion;
                 lblPrecio.Text = "Precio: " + articuloCompleto.Precio.ToString("C");
 
-                // Si tienes un PictureBox llamado pbxImagen para mostrar la imagen:
-                 if (articuloCompleto.Imagenes.Count > 0)
+                // Imagen principal
+                if (articuloCompleto.Imagenes != null && articuloCompleto.Imagenes.Count > 0)
                 {
-                    pbxImagen.Load(articuloCompleto.Imagenes[0].UrlImagen);
+                    try
+                    {
+                        pbxImagen.Load(articuloCompleto.Imagenes[0].UrlImagen);
+                    }
+                    catch
+                    {
+                        pbxImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+                    }
                 }
+            
+             else
+            {
+                pbxImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
             }
+        }
+
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar el detalle del artículo: " + ex.Message);
                 this.Close();
             }
+
+
+
 
         }
     }
