@@ -175,9 +175,21 @@ namespace TPWinForm_Presentacion
 
         private void btnFiltro_Click(object sender, EventArgs e)
         {
-            //List<Articulo> listaFiltrada;
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text;
 
-           // listaFiltrada = listaArticulos.FindAll;
+            if (filtro != "")
+            {
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulos;
+            }
+
+                dgvArticulo.DataSource = null;
+                dgvArticulo.DataSource = listaFiltrada;
+            
         }
     }
     }
