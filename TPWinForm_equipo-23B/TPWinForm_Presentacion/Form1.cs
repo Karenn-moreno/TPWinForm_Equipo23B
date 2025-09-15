@@ -167,6 +167,18 @@ namespace TPWinForm_Presentacion
             agregarArticulo.ShowDialog();
 
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            //List<Articulo> listaFiltrada;
+
+           // listaFiltrada = listaArticulos.FindAll;
+        }
     }
     }
 

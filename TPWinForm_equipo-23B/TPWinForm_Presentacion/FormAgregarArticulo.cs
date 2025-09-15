@@ -29,6 +29,7 @@ namespace TPWinForm_Presentacion
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
+            ArticuloNegocio negocio1 = new ArticuloNegocio();
 
             try
             {
@@ -39,9 +40,9 @@ namespace TPWinForm_Presentacion
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
-                articulo.Categoria=(Categoria)cboCategoria.SelectedItem;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
-                //imagen
+                //articulo.Imagen
 
 
                 // --- Agregar URL de imagen desde el TextBox ---
@@ -60,12 +61,13 @@ namespace TPWinForm_Presentacion
                 if (articulo.Id == 0)
                 {
 
+                
+
                     negocio.Agregar(articulo);
                     MessageBox.Show("Agregado exitosamente");
-                }
+                
 
-
-                Close();
+                    Close();
 
             }
             catch (Exception ex)
@@ -124,6 +126,16 @@ namespace TPWinForm_Presentacion
             }
         }
 
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCodigo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     
