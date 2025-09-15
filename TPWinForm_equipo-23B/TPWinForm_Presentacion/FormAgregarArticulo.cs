@@ -46,11 +46,22 @@ namespace TPWinForm_Presentacion
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                articulo.Marca = (Marca)cboMarca.SelectedItem;
-                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+               // articulo.Marca = (Marca)cboMarca.SelectedItem;
+                //articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
                 //articulo.Imagen
 
+                // Marca y Categoría usando SelectedValue y Text
+                articulo.Marca = new Marca
+                {
+                    Id = (int)cboMarca.SelectedValue,
+                    Descripcion = cboMarca.Text
+                };
+                articulo.Categoria = new Categoria
+                {
+                    Id = (int)cboCategoria.SelectedValue,
+                    Descripcion = cboCategoria.Text
+                };
 
                 //   --- Agregar URL de imagen desde el TextBox ---
                 string urlImagen = string.IsNullOrWhiteSpace(txtUrlImagen.Text)
@@ -68,31 +79,25 @@ namespace TPWinForm_Presentacion
 
                 if (articulo.Id == 0)
                 {
-
-
-
                     negocio.Agregar(articulo);
                     MessageBox.Show("Agregado exitosamente");
 
-                    if (articulo.Id != 0)
+                   
+                       
+                    }
+                    else
                     {
                         negocio.modificar(articulo);
                         MessageBox.Show("Modificado exitosamente");
                     }
-                    else
-                    {
-                        negocio.Agregar(articulo);
-                        MessageBox.Show("Agregado exitosamente");
-                    }
-
 
                     Close();
 
                 }
-            }
+            
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -103,8 +108,14 @@ namespace TPWinForm_Presentacion
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             try
             {
+                // --- Asignar DataSource y propiedades del ComboBox ---
                 cboMarca.DataSource = marcaNegocio.listar();
+                cboMarca.DisplayMember = "Descripcion";
+                cboMarca.ValueMember = "Id";
+
                 cboCategoria.DataSource = categoriaNegocio.listar();
+                cboCategoria.DisplayMember = "Descripcion";
+                cboCategoria.ValueMember = "Id";
 
                 if (articulo != null)
                 {
@@ -112,9 +123,14 @@ namespace TPWinForm_Presentacion
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtPrecio.Text = articulo.Precio.ToString();
-                    cboMarca.SelectedValue = articulo.Marca.Id;
-                    cboCategoria.SelectedValue = articulo.Categoria.Id;
-                  
+
+                    
+                    if (((List<Marca>)cboMarca.DataSource).Any(m => m.Id == articulo.Marca.Id))
+                        cboMarca.SelectedValue = articulo.Marca.Id;
+
+                    if (((List<Categoria>)cboCategoria.DataSource).Any(c => c.Id == articulo.Categoria.Id))
+                        cboCategoria.SelectedValue = articulo.Categoria.Id;
+
 
                     // Cargar imagen
                     if (articulo.Imagenes.Count > 0)

@@ -107,6 +107,8 @@ namespace TPWinForm_Presentacion
             }
 
             // Muestra los artículos en DataGridView
+
+            dgvArticulo.DataSource = null;      // Se limpia el datasourse
             dgvArticulo.DataSource = listaArticulos;
         }
 
@@ -121,7 +123,7 @@ namespace TPWinForm_Presentacion
             Articulo seleccionado;
             try
             {
-                DialogResult respuesta=MessageBox.Show("¿Desea eliminarlo?","Eliminado",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                DialogResult respuesta=MessageBox.Show("¿Desea eliminar el registro?","Eliminado",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
                 if (respuesta == DialogResult.Yes)
                 {
                     seleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
@@ -205,7 +207,12 @@ namespace TPWinForm_Presentacion
 
                 dgvArticulo.DataSource = null;
                 dgvArticulo.DataSource = listaFiltrada;
-            
+
+
+        }
+
+        private void lblFiltro_Click(object sender, EventArgs e)
+        {
 
         }
     }

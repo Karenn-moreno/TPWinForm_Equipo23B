@@ -42,31 +42,29 @@
             // 
             // dgvArticulo
             // 
+            this.dgvArticulo.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dgvArticulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvArticulo.Location = new System.Drawing.Point(60, 102);
-            this.dgvArticulo.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvArticulo.Location = new System.Drawing.Point(45, 83);
             this.dgvArticulo.Name = "dgvArticulo";
             this.dgvArticulo.RowHeadersWidth = 51;
-            this.dgvArticulo.Size = new System.Drawing.Size(617, 279);
+            this.dgvArticulo.Size = new System.Drawing.Size(463, 242);
             this.dgvArticulo.TabIndex = 0;
             this.dgvArticulo.SelectionChanged += new System.EventHandler(this.dgvArticulo_SelectionChanged);
             // 
             // fpImagen
             // 
             this.fpImagen.AutoScroll = true;
-            this.fpImagen.Location = new System.Drawing.Point(716, 102);
-            this.fpImagen.Margin = new System.Windows.Forms.Padding(4);
+            this.fpImagen.Location = new System.Drawing.Point(537, 83);
             this.fpImagen.Name = "fpImagen";
-            this.fpImagen.Size = new System.Drawing.Size(256, 279);
+            this.fpImagen.Size = new System.Drawing.Size(196, 242);
             this.fpImagen.TabIndex = 1;
             this.fpImagen.Paint += new System.Windows.Forms.PaintEventHandler(this.fpImagen_Paint);
             // 
             // btnEleminar
             // 
-            this.btnEleminar.Location = new System.Drawing.Point(60, 432);
-            this.btnEleminar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEleminar.Location = new System.Drawing.Point(379, 359);
             this.btnEleminar.Name = "btnEleminar";
-            this.btnEleminar.Size = new System.Drawing.Size(100, 28);
+            this.btnEleminar.Size = new System.Drawing.Size(74, 37);
             this.btnEleminar.TabIndex = 2;
             this.btnEleminar.Text = "Elimnar";
             this.btnEleminar.UseVisualStyleBackColor = true;
@@ -74,10 +72,10 @@
             // 
             // btnVerDetalle
             // 
-            this.btnVerDetalle.Location = new System.Drawing.Point(166, 432);
+            this.btnVerDetalle.Location = new System.Drawing.Point(47, 360);
             this.btnVerDetalle.Margin = new System.Windows.Forms.Padding(2);
             this.btnVerDetalle.Name = "btnVerDetalle";
-            this.btnVerDetalle.Size = new System.Drawing.Size(107, 28);
+            this.btnVerDetalle.Size = new System.Drawing.Size(82, 36);
             this.btnVerDetalle.TabIndex = 3;
             this.btnVerDetalle.Text = "Ver Detalle";
             this.btnVerDetalle.UseVisualStyleBackColor = true;
@@ -85,10 +83,10 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(290, 432);
+            this.btnAgregar.Location = new System.Drawing.Point(155, 360);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(120, 28);
+            this.btnAgregar.Size = new System.Drawing.Size(79, 36);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -97,25 +95,29 @@
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(57, 38);
+            this.lblFiltro.Location = new System.Drawing.Point(37, 34);
+            this.lblFiltro.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFiltro.Name = "lblFiltro";
-            this.lblFiltro.Size = new System.Drawing.Size(124, 16);
+            this.lblFiltro.Size = new System.Drawing.Size(99, 13);
             this.lblFiltro.TabIndex = 4;
             this.lblFiltro.Text = "Buscar por nombre:";
+            this.lblFiltro.Click += new System.EventHandler(this.lblFiltro_Click);
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(187, 38);
+            this.txtFiltro.Location = new System.Drawing.Point(140, 31);
+            this.txtFiltro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(281, 22);
+            this.txtFiltro.Size = new System.Drawing.Size(212, 20);
             this.txtFiltro.TabIndex = 5;
             this.txtFiltro.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // btnFiltro
             // 
-            this.btnFiltro.Location = new System.Drawing.Point(474, 38);
+            this.btnFiltro.Location = new System.Drawing.Point(367, 27);
+            this.btnFiltro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFiltro.Name = "btnFiltro";
-            this.btnFiltro.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltro.Size = new System.Drawing.Size(60, 27);
             this.btnFiltro.TabIndex = 6;
             this.btnFiltro.Text = "Buscar";
             this.btnFiltro.UseVisualStyleBackColor = true;
@@ -123,9 +125,10 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(427, 432);
+            this.btnModificar.Location = new System.Drawing.Point(262, 360);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(93, 28);
+            this.btnModificar.Size = new System.Drawing.Size(83, 36);
             this.btnModificar.TabIndex = 4;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -133,9 +136,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1063, 475);
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClientSize = new System.Drawing.Size(797, 418);
             this.Controls.Add(this.btnFiltro);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblFiltro);
@@ -146,7 +150,6 @@
             this.Controls.Add(this.fpImagen);
             this.Controls.Add(this.dgvArticulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
