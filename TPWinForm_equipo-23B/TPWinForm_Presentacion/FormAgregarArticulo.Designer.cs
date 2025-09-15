@@ -76,6 +76,7 @@
             this.lblCodigo.Size = new System.Drawing.Size(92, 13);
             this.lblCodigo.TabIndex = 2;
             this.lblCodigo.Text = "Codigo de articulo";
+            this.lblCodigo.Click += new System.EventHandler(this.lblCodigo_Click);
             // 
             // lblNombre
             // 
@@ -102,6 +103,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(121, 20);
             this.txtCodigo.TabIndex = 5;
+            this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
             // 
             // txtNombre
             // 

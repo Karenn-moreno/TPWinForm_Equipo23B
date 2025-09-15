@@ -168,6 +168,7 @@ namespace TPWinForm_Presentacion
 
         }
 
+
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (dgvArticulo.CurrentRow != null)
@@ -181,6 +182,31 @@ namespace TPWinForm_Presentacion
             {
                 MessageBox.Show("Por favor, seleccione un artículo para modificar.");
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro != "")
+            {
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulos;
+            }
+
+                dgvArticulo.DataSource = null;
+                dgvArticulo.DataSource = listaFiltrada;
+            
+
         }
     }
     }

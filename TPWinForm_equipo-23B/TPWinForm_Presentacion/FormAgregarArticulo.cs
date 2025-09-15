@@ -36,6 +36,7 @@ namespace TPWinForm_Presentacion
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
+            ArticuloNegocio negocio1 = new ArticuloNegocio();
 
             try
             {
@@ -46,15 +47,15 @@ namespace TPWinForm_Presentacion
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
-                articulo.Categoria=(Categoria)cboCategoria.SelectedItem;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
-                //imagen
+                //articulo.Imagen
 
 
-              //   --- Agregar URL de imagen desde el TextBox ---
-                 string urlImagen = string.IsNullOrWhiteSpace(txtUrlImagen.Text)
-                                 ? "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
-                                  : txtUrlImagen.Text;
+                //   --- Agregar URL de imagen desde el TextBox ---
+                string urlImagen = string.IsNullOrWhiteSpace(txtUrlImagen.Text)
+                                ? "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
+                                 : txtUrlImagen.Text;
 
                 articulo.Imagenes.Clear();
                 if (!string.IsNullOrWhiteSpace(txtUrlImagen.Text))
@@ -63,20 +64,31 @@ namespace TPWinForm_Presentacion
                 }
 
 
-                if (articulo.Id != 0)
+
+
+                if (articulo.Id == 0)
                 {
-                negocio.modificar(articulo);
-                MessageBox.Show("Modificado exitosamente");
-                }
-                else
-                { 
-                negocio.Agregar(articulo);
-                MessageBox.Show("Agregado exitosamente");
-                }
-                   
 
-                Close();
 
+
+                    negocio.Agregar(articulo);
+                    MessageBox.Show("Agregado exitosamente");
+
+                    if (articulo.Id != 0)
+                    {
+                        negocio.modificar(articulo);
+                        MessageBox.Show("Modificado exitosamente");
+                    }
+                    else
+                    {
+                        negocio.Agregar(articulo);
+                        MessageBox.Show("Agregado exitosamente");
+                    }
+
+
+                    Close();
+
+                }
             }
             catch (Exception ex)
             {
@@ -152,6 +164,16 @@ namespace TPWinForm_Presentacion
             }
         }
 
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCodigo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     
