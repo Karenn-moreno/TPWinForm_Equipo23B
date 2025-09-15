@@ -140,6 +140,50 @@ namespace negocio
             }
         }
 
+        public void modificar(Articulo art)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                // Actualiza los campos principales del artículo.
+                datos.setearConsulta("UPDATE ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where Id = @id");
+                datos.setearParametro("@codigo", art.Codigo);
+                datos.setearParametro("@nombre", art.Nombre);
+                datos.setearParametro("@descripcion", art.Descripcion);
+                datos.setearParametro("@idMarca", art.Marca.Id);
+                datos.setearParametro("@idCategoria", art.Categoria.Id);
+                datos.setearParametro("@precio", art.Precio);
+                datos.setearParametro("@id", art.Id);
+                datos.ejecutarAccion();
+
+                // Borra la imagen anterior del artículo.
+                datos.cerrarConexion();
+                datos = new AccesoDatos();
+                datos.setearConsulta("DELETE from IMAGENES where IdArticulo = @idArticulo");
+                datos.setearParametro("@idArticulo", art.Id);
+                datos.ejecutarAccion();
+
+                // Agrega la nueva imagen si la hay.
+                if (art.Imagenes.Count > 0)
+                {
+                    datos.cerrarConexion();
+                    datos = new AccesoDatos();
+                    datos.setearConsulta("INSERT into IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                    datos.setearParametro("@IdArticulo", art.Id);
+                    datos.setearParametro("@ImagenUrl", art.Imagenes[0].UrlImagen);
+                    datos.ejecutarAccion();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int id)
         {
             try

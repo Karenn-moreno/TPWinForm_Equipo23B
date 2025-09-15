@@ -33,33 +33,37 @@
             this.btnEleminar = new System.Windows.Forms.Button();
             this.btnVerDetalle = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulo
             // 
             this.dgvArticulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvArticulo.Location = new System.Drawing.Point(45, 83);
+            this.dgvArticulo.Location = new System.Drawing.Point(60, 102);
+            this.dgvArticulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvArticulo.Name = "dgvArticulo";
             this.dgvArticulo.RowHeadersWidth = 51;
-            this.dgvArticulo.Size = new System.Drawing.Size(463, 227);
+            this.dgvArticulo.Size = new System.Drawing.Size(617, 279);
             this.dgvArticulo.TabIndex = 0;
             this.dgvArticulo.SelectionChanged += new System.EventHandler(this.dgvArticulo_SelectionChanged);
             // 
             // fpImagen
             // 
             this.fpImagen.AutoScroll = true;
-            this.fpImagen.Location = new System.Drawing.Point(537, 83);
+            this.fpImagen.Location = new System.Drawing.Point(716, 102);
+            this.fpImagen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.fpImagen.Name = "fpImagen";
-            this.fpImagen.Size = new System.Drawing.Size(192, 227);
+            this.fpImagen.Size = new System.Drawing.Size(256, 279);
             this.fpImagen.TabIndex = 1;
             this.fpImagen.Paint += new System.Windows.Forms.PaintEventHandler(this.fpImagen_Paint);
             // 
             // btnEleminar
             // 
-            this.btnEleminar.Location = new System.Drawing.Point(45, 351);
+            this.btnEleminar.Location = new System.Drawing.Point(60, 432);
+            this.btnEleminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEleminar.Name = "btnEleminar";
-            this.btnEleminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEleminar.Size = new System.Drawing.Size(100, 28);
             this.btnEleminar.TabIndex = 2;
             this.btnEleminar.Text = "Elimnar";
             this.btnEleminar.UseVisualStyleBackColor = true;
@@ -67,10 +71,10 @@
             // 
             // btnVerDetalle
             // 
-            this.btnVerDetalle.Location = new System.Drawing.Point(138, 350);
-            this.btnVerDetalle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVerDetalle.Location = new System.Drawing.Point(167, 430);
+            this.btnVerDetalle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVerDetalle.Name = "btnVerDetalle";
-            this.btnVerDetalle.Size = new System.Drawing.Size(80, 23);
+            this.btnVerDetalle.Size = new System.Drawing.Size(107, 28);
             this.btnVerDetalle.TabIndex = 3;
             this.btnVerDetalle.Text = "Ver Detalle";
             this.btnVerDetalle.UseVisualStyleBackColor = true;
@@ -78,26 +82,38 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(236, 351);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAgregar.Location = new System.Drawing.Point(297, 431);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(90, 22);
+            this.btnAgregar.Size = new System.Drawing.Size(120, 27);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(441, 432);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(93, 28);
+            this.btnModificar.TabIndex = 4;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 386);
+            this.ClientSize = new System.Drawing.Size(1063, 475);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVerDetalle);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnEleminar);
             this.Controls.Add(this.fpImagen);
             this.Controls.Add(this.dgvArticulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -117,6 +133,7 @@
         private System.Windows.Forms.Button btnVerDetalle;
 
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }
 

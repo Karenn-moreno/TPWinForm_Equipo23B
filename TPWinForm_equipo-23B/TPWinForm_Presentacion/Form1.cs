@@ -167,6 +167,21 @@ namespace TPWinForm_Presentacion
             agregarArticulo.ShowDialog();
 
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvArticulo.CurrentRow != null)
+            {
+                Articulo seleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
+                FormAgregarArticulo modificarArticulo = new FormAgregarArticulo(seleccionado);
+                modificarArticulo.ShowDialog();
+                cargar();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un artículo para modificar.");
+            }
+        }
     }
     }
 

@@ -19,6 +19,13 @@ namespace TPWinForm_Presentacion
         {
             InitializeComponent();
         }
+        
+        public FormAgregarArticulo(Articulo articulo)// Nuevo constructor para modificar un artículo existente
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            this.Text = "Modificar Artículo"; // Cambia el título de la ventana
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -44,26 +51,29 @@ namespace TPWinForm_Presentacion
                 //imagen
 
 
-                // --- Agregar URL de imagen desde el TextBox ---
-                string urlImagen = string.IsNullOrWhiteSpace(txtUrlImagen.Text)
-                                   ? "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
-                                   : txtUrlImagen.Text;
+              //   --- Agregar URL de imagen desde el TextBox ---
+                 string urlImagen = string.IsNullOrWhiteSpace(txtUrlImagen.Text)
+                                 ? "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
+                                  : txtUrlImagen.Text;
 
-                if (articulo.Imagenes == null)
-                    articulo.Imagenes = new List<Imagen>();
-
-                articulo.Imagenes.Clear(); // Limpiar lista 
-                articulo.Imagenes.Add(new Imagen { UrlImagen = urlImagen });
-
-
-
-                if (articulo.Id == 0)
+                articulo.Imagenes.Clear();
+                if (!string.IsNullOrWhiteSpace(txtUrlImagen.Text))
                 {
-
-                    negocio.Agregar(articulo);
-                    MessageBox.Show("Agregado exitosamente");
+                    articulo.Imagenes.Add(new Imagen { UrlImagen = txtUrlImagen.Text });
                 }
 
+
+                if (articulo.Id != 0)
+                {
+                negocio.modificar(articulo);
+                MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                { 
+                negocio.Agregar(articulo);
+                MessageBox.Show("Agregado exitosamente");
+                }
+                   
 
                 Close();
 
@@ -83,6 +93,24 @@ namespace TPWinForm_Presentacion
             {
                 cboMarca.DataSource = marcaNegocio.listar();
                 cboCategoria.DataSource = categoriaNegocio.listar();
+
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.Codigo.ToString();
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+                  
+
+                    // Cargar imagen
+                    if (articulo.Imagenes.Count > 0)
+                    {
+                        txtUrlImagen.Text = articulo.Imagenes[0].UrlImagen;
+                        CargarImagen(txtUrlImagen.Text);
+                    }
+                }
             }
             catch (Exception ex)
             {
