@@ -37,14 +37,19 @@
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnFiltro = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuGestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMarcas = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvArticulo
             // 
             this.dgvArticulo.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dgvArticulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvArticulo.Location = new System.Drawing.Point(45, 83);
+            this.dgvArticulo.Location = new System.Drawing.Point(45, 98);
             this.dgvArticulo.Name = "dgvArticulo";
             this.dgvArticulo.RowHeadersWidth = 51;
             this.dgvArticulo.Size = new System.Drawing.Size(463, 242);
@@ -54,7 +59,7 @@
             // fpImagen
             // 
             this.fpImagen.AutoScroll = true;
-            this.fpImagen.Location = new System.Drawing.Point(537, 83);
+            this.fpImagen.Location = new System.Drawing.Point(542, 98);
             this.fpImagen.Name = "fpImagen";
             this.fpImagen.Size = new System.Drawing.Size(196, 242);
             this.fpImagen.TabIndex = 1;
@@ -95,7 +100,7 @@
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(37, 34);
+            this.lblFiltro.Location = new System.Drawing.Point(42, 47);
             this.lblFiltro.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFiltro.Name = "lblFiltro";
             this.lblFiltro.Size = new System.Drawing.Size(99, 13);
@@ -105,8 +110,8 @@
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(140, 31);
-            this.txtFiltro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFiltro.Location = new System.Drawing.Point(151, 44);
+            this.txtFiltro.Margin = new System.Windows.Forms.Padding(2);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(212, 20);
             this.txtFiltro.TabIndex = 5;
@@ -114,8 +119,8 @@
             // 
             // btnFiltro
             // 
-            this.btnFiltro.Location = new System.Drawing.Point(367, 27);
-            this.btnFiltro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFiltro.Location = new System.Drawing.Point(393, 40);
+            this.btnFiltro.Margin = new System.Windows.Forms.Padding(2);
             this.btnFiltro.Name = "btnFiltro";
             this.btnFiltro.Size = new System.Drawing.Size(60, 27);
             this.btnFiltro.TabIndex = 6;
@@ -126,13 +131,46 @@
             // btnModificar
             // 
             this.btnModificar.Location = new System.Drawing.Point(262, 360);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(83, 36);
             this.btnModificar.TabIndex = 4;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuGestionToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(797, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuGestionToolStripMenuItem
+            // 
+            this.menuGestionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMarcas,
+            this.categoriasToolStripMenuItem});
+            this.menuGestionToolStripMenuItem.Name = "menuGestionToolStripMenuItem";
+            this.menuGestionToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.menuGestionToolStripMenuItem.Text = "Menu Gestion";
+            // 
+            // toolStripMarcas
+            // 
+            this.toolStripMarcas.Name = "toolStripMarcas";
+            this.toolStripMarcas.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMarcas.Text = "Marcas";
+            this.toolStripMarcas.Click += new System.EventHandler(this.toolStripMarcas_Click);
+            // 
+            // categoriasToolStripMenuItem
+            // 
+            this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
+            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.categoriasToolStripMenuItem.Text = "Categorias";
             // 
             // Form1
             // 
@@ -149,13 +187,17 @@
             this.Controls.Add(this.btnEleminar);
             this.Controls.Add(this.fpImagen);
             this.Controls.Add(this.dgvArticulo);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,6 +216,11 @@
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+       /* private System.Windows.Forms.ToolStripMenuItem marcasToolStripMenuItem;*/
+        private System.Windows.Forms.ToolStripMenuItem menuGestionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMarcas;
+        private System.Windows.Forms.ToolStripMenuItem categoriasToolStripMenuItem;
     }
 }
 

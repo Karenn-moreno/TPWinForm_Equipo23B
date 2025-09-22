@@ -164,6 +164,7 @@
             this.lblImagen.Size = new System.Drawing.Size(67, 13);
             this.lblImagen.TabIndex = 12;
             this.lblImagen.Text = "URL-Imagen";
+            this.lblImagen.Click += new System.EventHandler(this.lblImagen_Click);
             // 
             // lblPrecio
             // 
@@ -250,5 +251,6 @@
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.PictureBox pbImagen;
         private System.Windows.Forms.TextBox txtUrlImagen;
+       /* private System.Windows.Forms.Button btnUrlsImagen;*/
     }
 }

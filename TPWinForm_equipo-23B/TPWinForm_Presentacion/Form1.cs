@@ -215,6 +215,17 @@ namespace TPWinForm_Presentacion
         {
 
         }
+
+        private void menuGestionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMarcas_Click(object sender, EventArgs e)
+        {
+            frmMarcas ventana= new frmMarcas();
+            ventana.ShowDialog();
+        }
     }
     }
 

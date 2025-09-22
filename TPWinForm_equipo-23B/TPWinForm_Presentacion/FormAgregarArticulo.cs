@@ -190,6 +190,17 @@ namespace TPWinForm_Presentacion
         {
 
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblImagen_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
     
