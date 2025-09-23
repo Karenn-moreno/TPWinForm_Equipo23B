@@ -34,12 +34,13 @@
             this.lblTituloMarca = new System.Windows.Forms.Label();
             this.btnEliminarMarca = new System.Windows.Forms.Button();
             this.btnModificarMarca = new System.Windows.Forms.Button();
+            this.btnCancelarMarca = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGestionMarcas)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvGestionMarcas
             // 
-            this.dgvGestionMarcas.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvGestionMarcas.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dgvGestionMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGestionMarcas.Location = new System.Drawing.Point(161, 74);
             this.dgvGestionMarcas.Name = "dgvGestionMarcas";
@@ -67,11 +68,11 @@
             // lblTituloMarca
             // 
             this.lblTituloMarca.AutoSize = true;
-            this.lblTituloMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloMarca.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.lblTituloMarca.Location = new System.Drawing.Point(296, 23);
+            this.lblTituloMarca.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloMarca.ForeColor = System.Drawing.Color.Navy;
+            this.lblTituloMarca.Location = new System.Drawing.Point(12, 22);
             this.lblTituloMarca.Name = "lblTituloMarca";
-            this.lblTituloMarca.Size = new System.Drawing.Size(192, 24);
+            this.lblTituloMarca.Size = new System.Drawing.Size(190, 24);
             this.lblTituloMarca.TabIndex = 3;
             this.lblTituloMarca.Text = "Marcas Disponibles";
             this.lblTituloMarca.Click += new System.EventHandler(this.lblTituloMarca_Click);
@@ -96,12 +97,23 @@
             this.btnModificarMarca.UseVisualStyleBackColor = true;
             this.btnModificarMarca.Click += new System.EventHandler(this.btnModificarMarca_Click);
             // 
+            // btnCancelarMarca
+            // 
+            this.btnCancelarMarca.Location = new System.Drawing.Point(677, 336);
+            this.btnCancelarMarca.Name = "btnCancelarMarca";
+            this.btnCancelarMarca.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelarMarca.TabIndex = 6;
+            this.btnCancelarMarca.Text = "Cancelar";
+            this.btnCancelarMarca.UseVisualStyleBackColor = true;
+            this.btnCancelarMarca.Click += new System.EventHandler(this.btnCancelarMarca_Click);
+            // 
             // frmMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(769, 450);
+            this.ClientSize = new System.Drawing.Size(764, 371);
+            this.Controls.Add(this.btnCancelarMarca);
             this.Controls.Add(this.btnModificarMarca);
             this.Controls.Add(this.btnEliminarMarca);
             this.Controls.Add(this.lblTituloMarca);
@@ -128,5 +140,6 @@
         private System.Windows.Forms.Label lblTituloMarca;
         private System.Windows.Forms.Button btnEliminarMarca;
         private System.Windows.Forms.Button btnModificarMarca;
+        private System.Windows.Forms.Button btnCancelarMarca;
     }
 }

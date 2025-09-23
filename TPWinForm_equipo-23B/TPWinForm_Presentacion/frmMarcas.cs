@@ -48,6 +48,11 @@ namespace TPWinForm_Presentacion
                     MessageBox.Show("Debe ingresar una Marca");
                     return;
                 }
+                if (descripcion.Length > 150)
+                {
+                    MessageBox.Show("La descripcion no puede superar los 150 caracteres");
+                    return;
+                }
 
                 Marca nuevaMarca = new Marca();
                 nuevaMarca.Descripcion = descripcion;
@@ -123,6 +128,11 @@ namespace TPWinForm_Presentacion
                     return;
                 }
 
+                if (seleccionada.Descripcion.Length > 150)
+                {
+                    MessageBox.Show("La descripcion no puede superar los 150 caracteres"); //validacion de la cadena
+                    return;
+                }
                 MarcaNegocio negocio = new MarcaNegocio();
                 bool modificado = negocio.Modificar(seleccionada); // devuelve bool
 
@@ -142,6 +152,11 @@ namespace TPWinForm_Presentacion
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnCancelarMarca_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
