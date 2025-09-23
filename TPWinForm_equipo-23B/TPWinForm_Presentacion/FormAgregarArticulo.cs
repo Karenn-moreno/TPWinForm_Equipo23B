@@ -46,10 +46,36 @@ namespace TPWinForm_Presentacion
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-               // articulo.Marca = (Marca)cboMarca.SelectedItem;
-                //articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
-                //articulo.Imagen
+
+
+                //precio validacion
+                decimal precio;
+                try
+                {
+                    precio = decimal.Parse(txtPrecio.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Ingrese un precio válido.");
+                    return;
+                }
+
+                if (precio <= 0)
+                {
+                    MessageBox.Show("El precio debe ser mayor a 0.");
+                    return;
+                }
+
+                articulo.Precio = precio; //si paso las validaciones
+
+                ///validacion codigo
+                if ((articulo.Id == 0) && negocio.ExisteCodigo(txtCodigo.Text.Trim()))
+                {
+                    MessageBox.Show("El código ya existe. Ingrese otro.");
+                    return;
+                }
+
+
 
                 // Marca y Categoría usando SelectedValue y Text
                 articulo.Marca = new Marca

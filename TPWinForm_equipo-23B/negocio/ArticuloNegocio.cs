@@ -199,6 +199,21 @@ namespace negocio
             }
 
         }
+        public bool ExisteCodigo(string codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT 1 FROM ARTICULOS WHERE Codigo = @cod");
+                datos.setearParametro("@cod", codigo);
+                datos.ejecutarLectura();
+                return datos.Lector.Read();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
 
 
