@@ -42,6 +42,25 @@ namespace TPWinForm_Presentacion
 
             try
             {
+                // Vlidaciones campos obligatirios
+                if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                {
+                    MessageBox.Show("El campo 'Nombre' no puede estar vacío.");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                {
+                    MessageBox.Show("El campo 'Descripción' no puede estar vacío.");
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(txtUrlImagen.Text) && !Uri.IsWellFormedUriString(txtUrlImagen.Text, UriKind.Absolute))
+                {
+                    MessageBox.Show("Por favor, ingrese una URL de imagen válida.");
+                    return;
+                }
+
                 if (articulo == null)
                     articulo = new Articulo();
 
