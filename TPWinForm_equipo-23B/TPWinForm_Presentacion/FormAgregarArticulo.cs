@@ -25,6 +25,8 @@ namespace TPWinForm_Presentacion
             InitializeComponent();
             this.articulo = articulo;
             this.Text = "Modificar Artículo"; // Cambia el título de la ventana
+            txtCodigo.ReadOnly = true; //Deja el codigo visible pero al apretar la función modificar no lo permite cambiar ni eliminar
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
