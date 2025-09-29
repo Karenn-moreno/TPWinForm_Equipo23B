@@ -199,6 +199,8 @@ namespace negocio
             }
 
         }
+        
+
         public bool ExisteCodigo(string codigo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -208,6 +210,102 @@ namespace negocio
                 datos.setearParametro("@cod", codigo);
                 datos.ejecutarLectura();
                 return datos.Lector.Read();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = @"SELECT a.Id, a.Codigo, a.Nombre, a.Descripcion,
+                                   m.Descripcion AS Marca,
+                                   c.Descripcion AS Categoria,
+                                   a.Precio
+                            FROM ARTICULOS a
+                            INNER JOIN MARCAS m ON a.IdMarca = m.Id
+                            INNER JOIN CATEGORIAS c ON a.IdCategoria = c.Id
+                            WHERE ";
+
+                if (campo == "Precio")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "a.Precio > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "a.Precio < " + filtro;
+                            break;
+                        default:
+                            consulta += "a.Precio = " + filtro;
+                            break;
+                    }
+                }
+                else if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "a.Nombre like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "a.Nombre like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "a.Nombre like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Descripcion")
+                {
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "a.Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "a.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "a.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo articulo = new Articulo();
+                    articulo.Id = (int)datos.Lector["Id"];
+                    articulo.Codigo = (string)datos.Lector["Codigo"];
+                    articulo.Nombre = (string)datos.Lector["Nombre"];
+                    articulo.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    articulo.Marca = new Marca();
+                    articulo.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    articulo.Categoria = new Categoria();
+                    articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    articulo.Precio = (decimal)datos.Lector["Precio"];
+
+                    lista.Add(articulo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {

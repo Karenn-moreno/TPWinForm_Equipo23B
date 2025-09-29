@@ -24,9 +24,15 @@ namespace TPWinForm_Presentacion
             InitializeComponent();
         }
 
+        //filtro avanzado
         private void Form1_Load(object sender, EventArgs e)
         {
             cargar();
+            cboCampo.Items.Add("Precio");
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Descripcion");
+
+
         }
 
         private void dgvArticulo_SelectionChanged(object sender, EventArgs e)
@@ -123,7 +129,7 @@ namespace TPWinForm_Presentacion
             Articulo seleccionado;
             try
             {
-                DialogResult respuesta=MessageBox.Show("¿Desea eliminar el registro?","Eliminado",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                DialogResult respuesta = MessageBox.Show("¿Desea eliminar el registro?", "Eliminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (respuesta == DialogResult.Yes)
                 {
                     seleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
@@ -191,6 +197,7 @@ namespace TPWinForm_Presentacion
 
         }
 
+        //boton filtro normal
         private void btnFiltro_Click(object sender, EventArgs e)
         {
             List<Articulo> listaFiltrada;
@@ -205,8 +212,8 @@ namespace TPWinForm_Presentacion
                 listaFiltrada = listaArticulos;
             }
 
-                dgvArticulo.DataSource = null;
-                dgvArticulo.DataSource = listaFiltrada;
+            dgvArticulo.DataSource = null;
+            dgvArticulo.DataSource = listaFiltrada;
 
 
         }
@@ -223,7 +230,7 @@ namespace TPWinForm_Presentacion
 
         private void toolStripMarcas_Click(object sender, EventArgs e)
         {
-            frmMarcas ventana= new frmMarcas();
+            frmMarcas ventana = new frmMarcas();
             ventana.ShowDialog();
         }
 
@@ -231,6 +238,101 @@ namespace TPWinForm_Presentacion
         {
             frmCategorias ventana = new frmCategorias();
             ventana.ShowDialog();
+        }
+        //
+        private void lblCriterio_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //filtro avanzado
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+            cboCriterio.Items.Clear();
+
+            if (opcion == "Precio")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Mayor a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Empieza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
+        }
+        
+       
+        
+
+
+        //buscar avanzado
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                if (cboCampo.SelectedItem == null || cboCriterio.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione campo y criterio antes de buscar.");
+                    return;
+                }
+
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+
+                // Validación extra para Precio
+                if (campo == "Precio")
+                {
+                    if (string.IsNullOrEmpty(filtro))
+                    {
+                        MessageBox.Show("Por favor ingrese un valor numérico para el precio.");
+                        return;
+                    }
+
+                    decimal precio;
+                    if (!decimal.TryParse(filtro, out precio))
+                    {
+                        MessageBox.Show("El filtro de precio debe ser un número válido.");
+                        return;
+                    }
+                }
+
+                // Traer artículos filtrados
+                listaArticulos = negocio.filtrar(campo, criterio, filtro);
+
+                //  Cargar imágenes relacionadas a esos artículos
+                List<Imagen> listaImagenes = imagenNeg.Listar();
+                foreach (var art in listaArticulos)
+                {
+                    art.Imagenes = listaImagenes
+                        .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
+                        .ToList();
+                }
+
+                dgvArticulo.DataSource = null;
+                dgvArticulo.DataSource = listaArticulos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtFiltroAvanzado_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboCriterio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
     }
