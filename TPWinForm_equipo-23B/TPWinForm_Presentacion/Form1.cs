@@ -24,7 +24,7 @@ namespace TPWinForm_Presentacion
             InitializeComponent();
         }
 
-        //filtro avanzado
+        //Filtro avanzado
         private void Form1_Load(object sender, EventArgs e)
         {
             cargar();
@@ -42,7 +42,7 @@ namespace TPWinForm_Presentacion
             Articulo seleccionado = dgvArticulo.CurrentRow.DataBoundItem as Articulo;
             if (seleccionado == null) return;
 
-            // Limpiar FlowLayoutPanel antes de agregar nuevas imágenes
+            // Limpiar antes de agregar nuevas imágenes
             fpImagen.Controls.Clear();
 
             // Si el artículo no tiene imágenes, mostrar imagen por defecto
@@ -102,7 +102,6 @@ namespace TPWinForm_Presentacion
                     // Inicializar la lista de imágenes del artículo
                     art.Imagenes = new List<Imagen>();
 
-                    // Relacionar solo las imágenes que tengan el objeto Articulo asignado
                     var imgs = listaImagenes
                         .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
                         .ToList();
@@ -112,9 +111,9 @@ namespace TPWinForm_Presentacion
                 }
             }
 
-            // Muestra los artículos en DataGridView
+            //Muestra los artículos en DataGridView
 
-            dgvArticulo.DataSource = null;      // Se limpia el datasourse
+            dgvArticulo.DataSource = null;      //Se limpia el datasourse
             dgvArticulo.DataSource = listaArticulos;
         }
 
@@ -146,7 +145,7 @@ namespace TPWinForm_Presentacion
 
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
-            // Asegúrate de que el nombre del control sea el mismo en el código y en el diseñador
+            
             if (dgvArticulo.CurrentRow != null)
             {
                 try
@@ -155,7 +154,7 @@ namespace TPWinForm_Presentacion
                     Articulo articuloSeleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
                     int idArticulo = articuloSeleccionado.Id;
 
-                    // Abrir el formulario de detalle
+                    
                     frmVerDetalle detalle = new frmVerDetalle(idArticulo);
                     detalle.ShowDialog();
                 }
@@ -239,7 +238,7 @@ namespace TPWinForm_Presentacion
             frmCategorias ventana = new frmCategorias();
             ventana.ShowDialog();
         }
-        //
+        
         private void lblCriterio_Click(object sender, EventArgs e)
         {
 
@@ -271,7 +270,7 @@ namespace TPWinForm_Presentacion
         
 
 
-        //buscar avanzado
+        //Buscar avanzado
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
@@ -287,7 +286,7 @@ namespace TPWinForm_Presentacion
                 string criterio = cboCriterio.SelectedItem.ToString();
                 string filtro = txtFiltroAvanzado.Text;
 
-                // Validación extra para Precio
+                // Validación 
                 if (campo == "Precio")
                 {
                     if (string.IsNullOrEmpty(filtro))
@@ -307,7 +306,7 @@ namespace TPWinForm_Presentacion
                 // Traer artículos filtrados
                 listaArticulos = negocio.filtrar(campo, criterio, filtro);
 
-                //  Cargar imágenes relacionadas a esos artículos
+                
                 List<Imagen> listaImagenes = imagenNeg.Listar();
                 foreach (var art in listaArticulos)
                 {

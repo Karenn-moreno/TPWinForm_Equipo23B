@@ -122,7 +122,7 @@ namespace negocio
                 //datos.setearParametro("@ImagenUrl", nuevo.Imagenes);
                 //datos.ejecutarAccion();
 
-                // Obtener la URL de la primera imagen o usar la por defecto
+                // Obtener la URL de la primera imagen
                 string urlImagen = (nuevo.Imagenes != null && nuevo.Imagenes.Count > 0)
                                    ? nuevo.Imagenes[0].UrlImagen
                                    : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png";
@@ -145,7 +145,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                // Actualiza los campos principales del artículo.
+                
                 datos.setearConsulta("UPDATE ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where Id = @id");
                 datos.setearParametro("@codigo", art.Codigo);
                 datos.setearParametro("@nombre", art.Nombre);
@@ -156,7 +156,7 @@ namespace negocio
                 datos.setearParametro("@id", art.Id);
                 datos.ejecutarAccion();
 
-                // Borra la imagen anterior del artículo.
+                // Borra la imagen anterior del artículo
                 datos.cerrarConexion();
                 datos = new AccesoDatos();
                 datos.setearConsulta("DELETE from IMAGENES where IdArticulo = @idArticulo");
