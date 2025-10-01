@@ -1,4 +1,5 @@
 ﻿using dominio;
+using negocio; //acceder al objeto 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using negocio; //acceder al objeto 
 
 
 
@@ -27,7 +27,15 @@ namespace TPWinForm_Presentacion
         //Filtro avanzado
         private void Form1_Load(object sender, EventArgs e)
         {
-            cargar();
+            try
+            {
+                cargar(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar los artículos: {ex.Message}", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             cboCampo.Items.Add("Precio");
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Descripcion");
@@ -73,9 +81,10 @@ namespace TPWinForm_Presentacion
                     {
                         pb.Load(img.UrlImagen);
                     }
-                    catch
+                    catch (Exception ex)  
                     {
-                        // Imagen por defecto si falla la URL
+                        // Logueo el error y cargo la imagen por defecto
+                        Console.WriteLine($"Error al cargar imagen: {img.UrlImagen}. Detalle: {ex.Message}");
                         pb.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
                     }
 
@@ -89,32 +98,37 @@ namespace TPWinForm_Presentacion
 
         private void cargar()
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.Listar();   // Traer todos los artículos
-
-            // Traer todas las imágenes
-            List<Imagen> listaImagenes = imagenNeg.Listar();
-
-            if (listaArticulos != null && listaImagenes != null)
+            try
             {
-                foreach (var art in listaArticulos)
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                listaArticulos = negocio.Listar();   // Traer todos los artículos
+
+                // Traer todas las imágenes
+                List<Imagen> listaImagenes = imagenNeg.Listar();
+
+                if (listaArticulos != null && listaImagenes != null)
                 {
-                    // Inicializar la lista de imágenes del artículo
-                    art.Imagenes = new List<Imagen>();
+                    foreach (var art in listaArticulos)
+                    {
+                        art.Imagenes = new List<Imagen>();
 
-                    var imgs = listaImagenes
-                        .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
-                        .ToList();
+                        var imgs = listaImagenes
+                            .Where(i => i.Articulo != null && i.Articulo.Id == art.Id)
+                            .ToList();
 
-                    if (imgs.Count > 0)
-                        art.Imagenes.AddRange(imgs);
+                        if (imgs.Count > 0)
+                            art.Imagenes.AddRange(imgs);
+                    }
                 }
+
+                dgvArticulo.DataSource = null;
+                dgvArticulo.DataSource = listaArticulos;
             }
-
-            //Muestra los artículos en DataGridView
-
-            dgvArticulo.DataSource = null;      //Se limpia el datasourse
-            dgvArticulo.DataSource = listaArticulos;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar los artículos desde la base de datos.\nDetalle: {ex.Message}",
+                    "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void fpImagen_Paint(object sender, PaintEventArgs e)
@@ -124,28 +138,50 @@ namespace TPWinForm_Presentacion
 
         private void btnEleminar_Click(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            Articulo seleccionado;
-            try
+            if (dgvArticulo.CurrentRow == null || dgvArticulo.CurrentRow.DataBoundItem == null)
             {
-                DialogResult respuesta = MessageBox.Show("¿Desea eliminar el registro?", "Eliminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (respuesta == DialogResult.Yes)
-                {
-                    seleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
-                    negocio.eliminar(seleccionado.Id);
-                    cargar();//actualiza la grilla
-                }
+                MessageBox.Show("Por favor, seleccione un artículo para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch (Exception ex)
+
+            
+            Articulo seleccionado = dgvArticulo.CurrentRow.DataBoundItem as Articulo;
+            if (seleccionado == null)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("El elemento seleccionado no es un artículo válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Confirmar antes de eliminar
+            DialogResult respuesta = MessageBox.Show(
+                $"¿Desea eliminar el artículo '{seleccionado.Nombre}'?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (respuesta == DialogResult.Yes)
+            {
+                try
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.eliminar(seleccionado.Id);
+
+                    MessageBox.Show("Artículo eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cargar(); 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"No se pudo eliminar el artículo '{seleccionado.Nombre}'. Detalle: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
 
+
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
-            
+
             if (dgvArticulo.CurrentRow != null)
             {
                 try
@@ -154,7 +190,7 @@ namespace TPWinForm_Presentacion
                     Articulo articuloSeleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
                     int idArticulo = articuloSeleccionado.Id;
 
-                    
+
                     frmVerDetalle detalle = new frmVerDetalle(idArticulo);
                     detalle.ShowDialog();
                 }
@@ -178,16 +214,39 @@ namespace TPWinForm_Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvArticulo.CurrentRow != null)
+            if (dgvArticulo.CurrentRow == null || dgvArticulo.CurrentRow.DataBoundItem == null)
             {
-                Articulo seleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
-                FormAgregarArticulo modificarArticulo = new FormAgregarArticulo(seleccionado);
-                modificarArticulo.ShowDialog();
-                cargar();
+                MessageBox.Show("Por favor, seleccione un artículo para modificar.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            // 2. Intentar castear el artículo
+            Articulo seleccionado = dgvArticulo.CurrentRow.DataBoundItem as Articulo;
+            if (seleccionado == null)
             {
-                MessageBox.Show("Por favor, seleccione un artículo para modificar.");
+                MessageBox.Show("El elemento seleccionado no es un artículo válido.",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3. Abrir el formulario de modificación
+            try
+            {
+                FormAgregarArticulo modificar = new FormAgregarArticulo(seleccionado);
+                modificar.ShowDialog();
+                cargar(); // refrescar grilla después de modificar
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No se pudo modificar el artículo '{seleccionado.Nombre}'.\nDetalle: {ex.Message}",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
         }
 
@@ -199,22 +258,35 @@ namespace TPWinForm_Presentacion
         //boton filtro normal
         private void btnFiltro_Click(object sender, EventArgs e)
         {
-            List<Articulo> listaFiltrada;
-            string filtro = txtFiltro.Text;
-
-            if (filtro != "")
+            try
             {
-                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()));
+                List<Articulo> listaFiltrada;
+                string filtro = txtFiltro.Text;
+
+                if (filtro != "")
+                {
+                    listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()));
+                    if (listaFiltrada.Count == 0)
+                    {
+                        MessageBox.Show("No se encontraron artículos que coincidan con el filtro.",
+                                        "Información",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    listaFiltrada = listaArticulos;
+                }
+
+                dgvArticulo.DataSource = null;
+                dgvArticulo.DataSource = listaFiltrada;
             }
-            else
+            catch (Exception ex)
             {
-                listaFiltrada = listaArticulos;
+                MessageBox.Show($"Error al aplicar el filtro por nombre.\nDetalle: {ex.Message}",
+                    "Error de filtro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            dgvArticulo.DataSource = null;
-            dgvArticulo.DataSource = listaFiltrada;
-
-
         }
 
         private void lblFiltro_Click(object sender, EventArgs e)
@@ -266,9 +338,6 @@ namespace TPWinForm_Presentacion
             }
         }
         
-       
-        
-
 
         //Buscar avanzado
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -278,7 +347,12 @@ namespace TPWinForm_Presentacion
             {
                 if (cboCampo.SelectedItem == null || cboCriterio.SelectedItem == null)
                 {
-                    MessageBox.Show("Por favor seleccione campo y criterio antes de buscar.");
+                    MessageBox.Show(
+                        "Por favor seleccione campo y criterio antes de buscar.",
+                        "Advertencia",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
                     return;
                 }
 
@@ -291,14 +365,24 @@ namespace TPWinForm_Presentacion
                 {
                     if (string.IsNullOrEmpty(filtro))
                     {
-                        MessageBox.Show("Por favor ingrese un valor numérico para el precio.");
+                        MessageBox.Show(
+                            "Por favor ingrese un valor numérico para el precio.",
+                            "Advertencia",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
                         return;
                     }
 
                     decimal precio;
                     if (!decimal.TryParse(filtro, out precio))
                     {
-                        MessageBox.Show("El filtro de precio debe ser un número válido.");
+                        MessageBox.Show(
+                            "El filtro de precio debe ser un número válido.",
+                            "Advertencia",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
                         return;
                     }
                 }
@@ -320,7 +404,9 @@ namespace TPWinForm_Presentacion
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Error al realizar la búsqueda con campo '{cboCampo.SelectedItem}' y criterio '{cboCriterio.SelectedItem}'.\nDetalle: {ex.Message}",
+                "Error de búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 

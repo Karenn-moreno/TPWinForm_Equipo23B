@@ -39,33 +39,34 @@ namespace TPWinForm_Presentacion
 
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Articulo articuloCompleto = negocio.Listar(idArticulo);
-
-                // Asignar los datos a los controles de la interfaz gráfica
-                lblCodigo.Text = "Código: " + articuloCompleto.Codigo;
-                lblNombre.Text = "Nombre: " + articuloCompleto.Nombre;
-                lblDescripcion.Text = "Descripción: " + articuloCompleto.Descripcion;
-                lblMarca.Text = "Marca: " + articuloCompleto.Marca.Descripcion;
-                lblCategoria.Text = "Categoría: " + articuloCompleto.Categoria.Descripcion;
-                lblPrecio.Text = "Precio: " + articuloCompleto.Precio.ToString("C");
-
-                // Imagen principal
-                if (articuloCompleto.Imagenes != null && articuloCompleto.Imagenes.Count > 0)
+                if (articuloCompleto != null)
                 {
-                    try
+                    // Asignar los datos a los controles de la interfaz gráfica
+                    lblCodigo.Text = "Codigo: " + articuloCompleto.Codigo;
+                    lblNombre.Text = "Nombre: " + articuloCompleto.Nombre;
+                    lblDescripcion.Text = "Descripcion: " + articuloCompleto.Descripcion;
+                    lblMarca.Text = "Marca: " + articuloCompleto.Marca.Descripcion;
+                    lblCategoria.Text = "Categoria: " + articuloCompleto.Categoria.Descripcion;
+                    lblPrecio.Text = "Precio: " + articuloCompleto.Precio.ToString("C");
+
+                    // Imagen principal
+                    if (articuloCompleto.Imagenes != null && articuloCompleto.Imagenes.Count > 0)
                     {
-                        pbxImagen.Load(articuloCompleto.Imagenes[0].UrlImagen);
-                    }
-                    catch
-                    {
-                        pbxImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+                        try
+                        {
+                            pbxImagen.Load(articuloCompleto.Imagenes[0].UrlImagen);
+                        }
+                        catch
+                        {
+                            pbxImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+                        }
                     }
                 }
-            
-             else
-            {
-                pbxImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+                else
+                {
+                    pbxImagen.Load("https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
+                }
             }
-        }
 
 
             catch (Exception ex)
@@ -73,8 +74,6 @@ namespace TPWinForm_Presentacion
                 MessageBox.Show("Error al cargar el detalle del artículo: " + ex.Message);
                 this.Close();
             }
-
-
 
 
         }

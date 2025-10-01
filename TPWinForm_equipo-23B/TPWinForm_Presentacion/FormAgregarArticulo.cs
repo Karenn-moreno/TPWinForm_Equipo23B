@@ -96,6 +96,18 @@ namespace TPWinForm_Presentacion
                     return;
                 }
 
+                if (cboMarca.SelectedItem == null)
+                {
+                    MessageBox.Show("Debe seleccionar una marca.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (cboCategoria.SelectedItem == null)
+                {
+                    MessageBox.Show("Debe seleccionar una categoría.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
 
 
                 // Marca y Categoría usando SelectedValue y Text
@@ -141,10 +153,18 @@ namespace TPWinForm_Presentacion
                     Close();
 
                 }
-            
+
+            catch (FormatException)
+            {
+                MessageBox.Show("Revise que todos los campos numéricos estén en el formato correcto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Data.SqlClient.SqlException sqlEx)
+            {
+                MessageBox.Show("Error al guardar en la base de datos: " + sqlEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
